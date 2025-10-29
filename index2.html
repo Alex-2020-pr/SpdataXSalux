@@ -180,9 +180,18 @@
         .btn-secondary:hover {
             background-color: var(--secondary);
         }
+
+        .btn-print {
+            background-color: #6c757d;
+        }
+        
+        .btn-print:hover {
+            background-color: #5a6268;
+        }
         
         section {
             padding: 60px 0;
+            position: relative;
         }
         
         .section-title {
@@ -519,6 +528,21 @@
             right: 20px;
             z-index: 1000;
         }
+
+        .section-controls {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+            z-index: 10;
+        }
+
+        .section-controls .btn {
+            padding: 8px 15px;
+            font-size: 0.9rem;
+            margin: 0;
+        }
         
         .benefit-highlight-box {
             background: linear-gradient(135deg, #e3f2fd, #bbdefb);
@@ -551,6 +575,52 @@
             transform: scale(1.1);
             box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
         }
+
+        /* Estilos para impressão */
+        @media print {
+            .floating-whatsapp,
+            .pdf-controls,
+            .section-controls,
+            .btn {
+                display: none !important;
+            }
+            
+            body {
+                background: white !important;
+                color: black !important;
+            }
+            
+            .highlight, .benefit-card, .feature-card, .diferencial-card, .solution-item {
+                box-shadow: none !important;
+                border: 1px solid #ddd !important;
+            }
+            
+            .comparison-table {
+                box-shadow: none !important;
+                border: 1px solid #ddd !important;
+            }
+            
+            .benefits-section, .diferenciais-section, .partnership-section {
+                background: white !important;
+                border: 1px solid #ddd !important;
+            }
+            
+            .closing-argument {
+                background: #f0f0f0 !important;
+                color: black !important;
+            }
+            
+            header {
+                background: #f0f0f0 !important;
+                color: black !important;
+            }
+            
+            .logo-card {
+                background: white !important;
+                box-shadow: none !important;
+                border: 1px solid #ddd !important;
+            }
+        }
         
         @media (max-width: 768px) {
             .comparison-table {
@@ -564,7 +634,13 @@
             
             .pdf-controls {
                 position: static;
-                text-align: center;
+                justify-content: center;
+                margin-bottom: 20px;
+            }
+
+            .section-controls {
+                position: static;
+                justify-content: center;
                 margin-bottom: 20px;
             }
             
@@ -597,7 +673,7 @@
     </a>
     
     <div class="pdf-controls">
-        <button id="generatePdf" class="btn"><i class="fas fa-file-pdf"></i> Exportar PDF</button>
+        <button id="generatePdf" class="btn"><i class="fas fa-file-pdf"></i> Exportar PDF Completo</button>
     </div>
     
     <header>
@@ -632,6 +708,14 @@
     
     <section id="introducao">
         <div class="container">
+            <div class="section-controls">
+                <button class="btn btn-print" onclick="printSection('introducao')">
+                    <i class="fas fa-print"></i> Imprimir
+                </button>
+                <button class="btn" onclick="exportSectionToPdf('introducao', 'Introducao_SPDATA.pdf')">
+                    <i class="fas fa-file-pdf"></i> PDF
+                </button>
+            </div>
             <h2 class="section-title">Por que escolher a SPDATA?</h2>
             <div class="highlight">
                 <p>A SPDATA é hoje uma das soluções mais completas e seguras do mercado, certificada pela SBIS e com módulos integrados que atendem todo o ciclo hospitalar, do agendamento à gestão financeira.</p>
@@ -642,6 +726,14 @@
     
     <section id="beneficios-exclusivos">
         <div class="container">
+            <div class="section-controls">
+                <button class="btn btn-print" onclick="printSection('beneficios-exclusivos')">
+                    <i class="fas fa-print"></i> Imprimir
+                </button>
+                <button class="btn" onclick="exportSectionToPdf('beneficios-exclusivos', 'Beneficios_SPDATA.pdf')">
+                    <i class="fas fa-file-pdf"></i> PDF
+                </button>
+            </div>
             <h2 class="section-title">Benefícios Exclusivos para o Hospital Madalena Sofia</h2>
             <div class="benefits-section">
                 <div class="benefits-grid">
@@ -692,6 +784,14 @@
     
     <section id="diferenciais-exclusivos">
         <div class="container">
+            <div class="section-controls">
+                <button class="btn btn-print" onclick="printSection('diferenciais-exclusivos')">
+                    <i class="fas fa-print"></i> Imprimir
+                </button>
+                <button class="btn" onclick="exportSectionToPdf('diferenciais-exclusivos', 'Diferenciais_SPDATA.pdf')">
+                    <i class="fas fa-file-pdf"></i> PDF
+                </button>
+            </div>
             <h2 class="section-title">Diferenciais Exclusivos da SPDATA</h2>
             <div class="diferenciais-section">
                 <div class="diferenciais-grid">
@@ -737,6 +837,14 @@
     
     <section id="comparativo">
         <div class="container">
+            <div class="section-controls">
+                <button class="btn btn-print" onclick="printSection('comparativo')">
+                    <i class="fas fa-print"></i> Imprimir
+                </button>
+                <button class="btn" onclick="exportSectionToPdf('comparativo', 'Comparativo_SPDATA_vs_SALUX.pdf')">
+                    <i class="fas fa-file-pdf"></i> PDF
+                </button>
+            </div>
             <h2 class="section-title">Comparativo Técnico e Estratégico</h2>
             <h3 style="text-align: center; margin-bottom: 20px; color: var(--gray);">SPDATA vs SALUX</h3>
             
@@ -841,6 +949,14 @@
     
     <section id="solucoes">
         <div class="container">
+            <div class="section-controls">
+                <button class="btn btn-print" onclick="printSection('solucoes')">
+                    <i class="fas fa-print"></i> Imprimir
+                </button>
+                <button class="btn" onclick="exportSectionToPdf('solucoes', 'Solucoes_Propostas_SPDATA.pdf')">
+                    <i class="fas fa-file-pdf"></i> PDF
+                </button>
+            </div>
             <h2 class="section-title">Soluções Propostas para o Hospital Madalena Sofia</h2>
             <div class="highlight">
                 <p>Implementação completa do sistema SPDATA com todas as soluções integradas para otimizar a gestão hospitalar:</p>
@@ -905,6 +1021,14 @@
     
     <section id="perguntas">
         <div class="container">
+            <div class="section-controls">
+                <button class="btn btn-print" onclick="printSection('perguntas')">
+                    <i class="fas fa-print"></i> Imprimir
+                </button>
+                <button class="btn" onclick="exportSectionToPdf('perguntas', 'Perguntas_Chave_SALUX.pdf')">
+                    <i class="fas fa-file-pdf"></i> PDF
+                </button>
+            </div>
             <h2 class="section-title">Perguntas-Chave para o Cliente Fazer à SALUX</h2>
             <div class="highlight">
                 <p>Essas perguntas ajudam o cliente a perceber sozinho as limitações da outra proposta:</p>
@@ -932,20 +1056,15 @@
                 
                 <h3 style="margin-top: 25px; color: var(--primary);">🔹 PACS e Laudos</h3>
                 <ul class="questions-list">
-                    <li>O PACS é nativo ou depende de outro fornecedor?</li>
-                    <li>Existe custo adicional por estudo, imagem ou armazenamento?</li>
+                    <li>O PACS possui registro ANVISA?</li>
+                    <li>Existe portal de entrega de resultados para pacientes e médicos?</li>
+                    <li>Há custo adicional por estudo, imagem ou armazenamento?</li>
                 </ul>
                 
                 <h3 style="margin-top: 25px; color: var(--primary);">🔹 Custos e BI</h3>
                 <ul class="questions-list">
                     <li>Existe módulo de gestão de custos hospitalares (centros de custo, SADT, APAC)?</li>
                     <li>Os relatórios BI são customizáveis e integrados a todos os módulos?</li>
-                </ul>
-                
-                <h3 style="margin-top: 25px; color: var(--primary);">🔹 Suporte e SLA</h3>
-                <ul class="questions-list">
-                    <li>O suporte é direto da fábrica ou terceirizado?</li>
-                    <li>Qual o tempo médio de atendimento e resolução?</li>
                 </ul>
 
                 <div style="text-align: center; margin-top: 30px;">
@@ -959,6 +1078,14 @@
     
     <section id="parceria">
         <div class="container">
+            <div class="section-controls">
+                <button class="btn btn-print" onclick="printSection('parceria')">
+                    <i class="fas fa-print"></i> Imprimir
+                </button>
+                <button class="btn" onclick="exportSectionToPdf('parceria', 'Parceria_SPDATA.pdf')">
+                    <i class="fas fa-file-pdf"></i> PDF
+                </button>
+            </div>
             <h2 class="section-title">Parceria SPDATA - Benefícios Exclusivos</h2>
             <div class="partnership-section">
                 <p>A SPDATA está investindo em uma parceria estratégica com o Hospital Madalena Sofia, oferecendo benefícios exclusivos:</p>
@@ -990,6 +1117,14 @@
 
     <section class="closing-argument">
         <div class="container">
+            <div class="section-controls">
+                <button class="btn btn-print" onclick="printSection('closing')">
+                    <i class="fas fa-print"></i> Imprimir
+                </button>
+                <button class="btn" onclick="exportSectionToPdf('closing', 'Conclusao_SPDATA.pdf')">
+                    <i class="fas fa-file-pdf"></i> PDF
+                </button>
+            </div>
             <h2 class="closing-title">SPDATA: A escolha estratégica para o Hospital Madalena Sofia</h2>
             <p style="font-size: 1.2rem; max-width: 800px; margin: 0 auto 30px; position: relative; z-index: 1;">
                 Com módulos integrados de PEP Paperless com rastreabilidade completa, PACS próprio com portal online, Custos e BI, Faturamento AIH/BPA/Convênios com geração direta de XML TISS, Checagem Beira Leito, Agendamento Online e Bloco Cirúrgico, o hospital passa a ter controle total, conformidade e segurança de dados — tudo em uma única plataforma.
@@ -1027,11 +1162,70 @@
     </footer>
 
     <script>
-        document.getElementById('generatePdf').addEventListener('click', function() {
-            // Elemento que queremos converter para PDF
-            const element = document.body;
+        // Função para imprimir uma seção específica
+        function printSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            if (!section) {
+                // Se não encontrar a seção, tenta usar a classe (para a seção de fechamento)
+                const sections = document.getElementsByClassName(sectionId);
+                if (sections.length > 0) {
+                    printElement(sections[0]);
+                }
+                return;
+            }
+            printElement(section);
+        }
+
+        function printElement(element) {
+            const originalContents = document.body.innerHTML;
+            const printContents = element.innerHTML;
             
+            document.body.innerHTML = printContents;
+            window.print();
+            document.body.innerHTML = originalContents;
+            location.reload(); // Recarrega a página para restaurar funcionalidades
+        }
+
+        // Função para exportar uma seção para PDF
+        function exportSectionToPdf(sectionId, filename) {
+            let element;
+            
+            if (sectionId === 'closing') {
+                // Para a seção de fechamento que usa classe
+                element = document.querySelector('.closing-argument');
+            } else {
+                element = document.getElementById(sectionId);
+            }
+            
+            if (!element) {
+                alert('Seção não encontrada!');
+                return;
+            }
+
             // Opções de configuração do PDF
+            const options = {
+                margin: 10,
+                filename: filename,
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { 
+                    scale: 2,
+                    useCORS: true,
+                    logging: false
+                },
+                jsPDF: { 
+                    unit: 'mm', 
+                    format: 'a4', 
+                    orientation: 'portrait' 
+                }
+            };
+
+            // Gerar PDF
+            html2pdf().set(options).from(element).save();
+        }
+
+        // PDF completo (original)
+        document.getElementById('generatePdf').addEventListener('click', function() {
+            const element = document.body;
             const options = {
                 margin: 10,
                 filename: 'Proposta_SPDATA_Hospital_Madalena_Sofia.pdf',
@@ -1040,7 +1234,6 @@
                 jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
             };
             
-            // Gerar PDF
             html2pdf().set(options).from(element).save();
         });
         
